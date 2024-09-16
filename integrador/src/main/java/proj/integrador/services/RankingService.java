@@ -21,8 +21,8 @@ public class RankingService {
 		return rankingRepository.findAll(Sort.by(Sort.Direction.DESC,"pontuacao"));
 	}
 	
-	public void aturalizarPontuacao (Integer atleticaId, int pontos) {
-		Optional<RankingEntity> rankingOpt = rankingRepository.findByAtleticaId(atleticaId);
+	public void atualizarPontuacao (Integer atletica_id, int pontos) {
+		Optional<RankingEntity> rankingOpt = rankingRepository.findByAtleticaId(atletica_id);
 		if (rankingOpt.isPresent()) {
 			RankingEntity ranking = rankingOpt.get();
 			ranking.setPontuacaoTotal(ranking.getPontuacaoTotal() + pontos);
