@@ -1,5 +1,6 @@
 package proj.integrador.entities;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -10,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,19 +27,31 @@ public class ProdutoEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	@Column(name = "nome")
 	private String nome;
 	private String descricao;
 	private String lote;
 	private double preco;
+	private LocalDateTime dataEvento;//novo
+	private String whatsappLink;
+	private String imagem;
 	
+	
+	
+	public String getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
+	}
+
 	@ManyToMany
 	@JoinTable(
 			name = "produto_atletica",
 			joinColumns = @JoinColumn(name = "produto"),
 			inverseJoinColumns = @JoinColumn(name = "atletica")
 			)
-	private List<AtleticaEntity> atletica;
+	private List<AtleticaEntity> atletica;//Set N aceita valores repetidos e List SIM
 	
 	@ManyToMany
 	@JoinTable(
@@ -46,6 +60,26 @@ public class ProdutoEntity {
 			inverseJoinColumns = @JoinColumn(name = "usuario")
 			)
 	private List<UsuarioEntity> usuario;
+
+	@ManyToOne
+	@JoinColumn(name = "atletica_id")
+	private ProdutoEntity produtos;
+
+	public String getWhatsappLink() {
+		return whatsappLink;
+	}
+
+	public void setWhatsappLink(String whatsappLink) {
+		this.whatsappLink = whatsappLink;
+	}
+
+	public LocalDateTime getDataEvento() {
+		return dataEvento;
+	}
+
+	public void setDataEvento(LocalDateTime dataEvento) {
+		this.dataEvento = dataEvento;
+	}
 
 	public Integer getId() {
 		return id;
