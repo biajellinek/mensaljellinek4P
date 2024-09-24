@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,8 +25,9 @@ public class AtleticaEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	private Long id;
 	
+	private Integer donoId;
 	private String nome;
 	private String universidade;
 	private String cnpj;
@@ -35,12 +37,24 @@ public class AtleticaEntity {
 	
 	@ManyToMany(mappedBy = "atletica")
 	private List<ProdutoEntity> produto;
+	
+	@OneToMany(mappedBy = "atletica")
+	private List<ProdutoEntity> produtos;
+	
 
-	public Integer getId() {
+	public Integer getDonoId() {
+		return donoId;
+	}
+
+	public void setDonoId(Integer donoId) {
+		this.donoId = donoId;
+	}
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
