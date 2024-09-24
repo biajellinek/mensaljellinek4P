@@ -22,7 +22,7 @@ public class RankingService {
 	}
 	
 	public void atualizarPontuacao (Integer atletica_id, int pontos) {
-		Optional<RankingEntity> rankingOpt = rankingRepository.findByAtleticaId(atletica_id);
+		Optional<RankingEntity> rankingOpt = rankingRepository.findById(atletica_id);
 		if (rankingOpt.isPresent()) {
 			RankingEntity ranking = rankingOpt.get();
 			ranking.setPontuacaoTotal(ranking.getPontuacaoTotal() + pontos);
@@ -31,6 +31,26 @@ public class RankingService {
 			System.out.println("atlética não encontrada no ranking");
 		}
 		
+	}
+	
+	public RankingEntity saveRanking(RankingEntity rankingEntity) {
+		
+		return rankingRepository.save(rankingEntity);
+	}
+	
+	public List<RankingEntity> listarRanking(){
+		
+		return rankingRepository.findAllByPontuacaoTotalDesc();
+	}
+	
+	public RankingEntity findById(Integer id) {
+		
+		try {
+			return rankingRepository.findById(id).orElseThrow();
+		} catch (Exception e) {
+			System.out.println(e.getCause());
+			return new RankingEntity();
+		}
 	}
 	
 	// cod pra teste
