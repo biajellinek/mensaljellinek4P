@@ -23,24 +23,25 @@ public class RankingEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	private int atletica_id;
+	private Integer atletica_id;
 	private int pontuacao_total;
 	
 	@ManyToOne
-	@JoinColumn (name = "atletica_id", nullable = false)
+	@JoinColumn (name = "atletica_id", nullable = false, insertable = false, updatable = false)
 	private AtleticaEntity atleticaEntity;
 	
-	@Column(name = "pontuacao_total", nullable = false)
+		
+	@Column(name = "pontuacao_total", nullable = false,insertable = false, updatable = false)
 	private int pontuacaoTotal;
 	
+	
 	public int getPontuacaoTotal() {
-        return pontuacaoTotal;
-    }
+		return pontuacao_total;
+	}
 
-    public void setPontuacaoTotal(int pontuacaoTotal) {
-        this.pontuacaoTotal = pontuacaoTotal;
-    }
-	
-	
+	public void setPontuacaoTotal(int pontuacao_total) {
+		this.pontuacao_total = pontuacao_total;
+	}
 
+	
 }
