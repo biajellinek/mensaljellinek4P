@@ -1,6 +1,7 @@
 package proj.integrador.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,5 +22,15 @@ public class UsuarioService {
 
 	public List<UsuarioEntity> findAll(){
 		return usuarioRepository.findAll();
+	}
+	
+	public UsuarioEntity finById (Integer id){
+		try {
+			return usuarioRepository.findById(id).orElseThrow();
+		} catch (Exception e) {
+			System.out.println(e.getCause());
+			return new UsuarioEntity();
+		}
+		
 	}
 }
